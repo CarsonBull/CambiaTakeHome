@@ -14,7 +14,7 @@ give a comprenhensive look at the functionality.
 Files:
 README.md
 DockerFile
-GherkinFile
+csvSorter.feature
 /src/
   csvSorter.py
 
