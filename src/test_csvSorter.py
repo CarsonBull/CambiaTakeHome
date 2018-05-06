@@ -1,5 +1,5 @@
 import unittest
-from csvSorter import get_line, get_words 
+from csvSorter import get_line, get_words
 
 
 class TestCSVSorter(unittest.TestCase):
@@ -16,4 +16,14 @@ class TestCSVSorter(unittest.TestCase):
         self.assertEqual(get_words("\n") , [])
         self.assertEqual(get_words("this,is,,test\n") , ["this","is","test"])
         self.assertEqual(get_words("this,i1s,a,te st\n") , ["this","i1s","a","te st"])
-        self.assertRaises(ValueError, get_words, 2) 
+        self.assertRaises(ValueError, get_words, 2)
+
+    def test_word_sorter(self):
+        '''Tests that the word sorter works to sort words'''
+        self.assertEqual(word_sorter(["this","is","a","test"]), ["this","test","is","a"])
+        self.assertEqual(word_sorter(["z","c","b","a"]), ["z","c","b","a"])
+        self.assertEqual(word_sorter(["a","b","c","z"]), ["z","c","b","a"])
+        self.assertEqual(word_sorter(["c","a","c","z"]), ["z","c","c","a"])
+        self.assertEqual(word_sorter(["the","cat","ca t","z"]), ["z","the","cat","ca t"])
+        self.assertEqual(word_sorter(["c1","a","1d","c","2","1","z"]), ["z","c1","c","a","2","1d","1"])
+        self.assertRaises(ValueError, word_sorter, 2.13)
