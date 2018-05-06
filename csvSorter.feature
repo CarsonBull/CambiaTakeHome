@@ -70,7 +70,7 @@ Feature: Normal Sorting (No file issues. Might have issues, or edge cases in the
     Then numerics will be given the highest priority
     And the output will be "z,a1,a,1\n"
 
-  Scenario: Run on a csv with puncuation in words
+  Scenario: Run on a csv with puncuation in words, excluding commas
     Given the csv contains "z,a,.,a.,A!\n"
     When the user runs csvSorter.py
     Then all words containing punctuation will be dropped
