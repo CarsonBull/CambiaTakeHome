@@ -21,6 +21,9 @@ def get_line(fileName):
 def get_words(line):
     '''The get_words function takes a string that is seperated by commas and ends in a newline and returns a list of the words. This can then be processed in many different ways. It will throw a value error if the input is not a string'''
 
+    if type(line) != str:
+        raise ValueError("The input to get_words should be a string")
+
     runningList = []
     wordStart = 0
     badWord = False
@@ -66,26 +69,40 @@ def sort_words(wordList):
         rightHalf = sort_words(wordList[middlePos:])
 
         sortedWords = []
-        leftPos = middlePos
+        leftPos = 0
+        leftLen = len(leftHalf)
         rightPos = 0
+        rightLen = len(rightHalf)
 
         for i in range(len(wordList)):
-            if rightPos >= middlePos:
-                sortedWords.append(wordList[leftPos])
-                leftPos += 1
-            if compare_words(wordList[rightPos],wordList[leftPos]) or leftPos >= len(wordList):
-                sortedWords.append(wordList[rightPos])
+            if leftPos >= leftLen:
+                sortedWords.append(rightHalf[rightPos])
                 rightPos += 1
-            else:
-                sortedWords.append(wordList[leftPos])
+            elif rightPos >= rightLen:
+                sortedWords.append(leftHalf[leftPos])
                 leftPos += 1
+            elif compare_words(leftHalf[leftPos],rightHalf[rightPos]):
+                sortedWords.append(leftHalf[leftPos])
+                leftPos += 1
+            else:
+                sortedWords.append(rightHalf[rightPos])
+                rightPos += 1
 
         return sortedWords
 
 def compare_words(leftWord, rightWord):
     '''This function returns True if the leftWord should be before the right word in a reverse alphabetic order. Otherwise it returns False and ther rightWord sould come first'''
-    for i in range(len(leftWord) if len(leftWord) <= len(rightWord) else len(rightWord)):
-        pass
+    # I made the choice to use pythins builtin min function for comparing words
+    # This is a very complicated issue that will allow the system to handle
+    # more advanced unicode words in the future if necessary
+
+    if type(leftWord) != str or type(rightWord) != str:
+        raise ValueError("Both words need to be strings")
+
+    if min(leftWord, rightWord) == leftWord:
+        return False
+    else:
+        return True
 
 if __name__ == "__main__":
   main("input.csv")

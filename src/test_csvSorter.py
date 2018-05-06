@@ -1,9 +1,9 @@
 import unittest
-from csvSorter import get_line, get_words
+from csvSorter import get_line, get_words, sort_words, compare_words
 
 
 class TestCSVSorter(unittest.TestCase):
-    def test_getLine(self):
+    def test_get_line(self):
         '''Tests the get_line function actually gets a line and fails on non string inputs, nonexistant files and files without newlines'''
         self.assertEqual(get_line("testFile.csv"),"this is a line\n")
         self.assertRaises(ValueError, get_line, 2)
@@ -18,21 +18,24 @@ class TestCSVSorter(unittest.TestCase):
         self.assertEqual(get_words("this,i1s,a,te st\n") , ["this","i1s","a","te st"])
         self.assertRaises(ValueError, get_words, 2)
 
-    def test_word_sorter(self):
+    def test_sort_words(self):
         '''Tests that the word sorter works to sort words'''
-        self.assertEqual(word_sorter(["this","is","a","test"]), ["this","test","is","a"])
-        self.assertEqual(word_sorter(["z","c","b","a"]), ["z","c","b","a"])
-        self.assertEqual(word_sorter(["a","b","c","z"]), ["z","c","b","a"])
-        self.assertEqual(word_sorter(["c","a","c","z"]), ["z","c","c","a"])
-        self.assertEqual(word_sorter(["the","cat","ca t","z"]), ["z","the","cat","ca t"])
-        self.assertEqual(word_sorter(["c1","a","1d","c","2","1","z"]), ["z","c1","c","a","2","1d","1"])
-        self.assertRaises(ValueError, word_sorter, 2.13)
+        self.assertEqual(sort_words(['a']), ['a'])
+        self.assertEqual(sort_words(['a','b']), ['b','a'])
+        self.assertEqual(sort_words(["this","is","a","test"]), ["this","test","is","a"])
+        self.assertEqual(sort_words(["z","c","b","a"]), ["z","c","b","a"])
+        self.assertEqual(sort_words(["a","b","c","z"]), ["z","c","b","a"])
+        self.assertEqual(sort_words(["c","a","c","z"]), ["z","c","c","a"])
+        self.assertEqual(sort_words(["the","cat","ca t","z"]), ["z","the","cat","ca t"])
+        self.assertEqual(sort_words(["c1","a","1d","c","2","1","z"]), ["z","c1","c","a","2","1d","1"])
+        self.assertRaises(ValueError, sort_words, ["this","is",1,"bad","situation"])
+        self.assertRaises(ValueError, sort_words, 2.13)
 
     def test_compare_word(self):
         '''Tests that the compare_words function returns true when word1 should be placed before word2 and false otherwise'''
         self.assertEqual(compare_words("b","a"), True)
         self.assertEqual(compare_words("a","b"), False)
         self.assertEqual(compare_words("1","1a"), False)
-        self.assertEqual(compare_words("cat","ca t"), False)
+        self.assertEqual(compare_words("cat","ca t"), True)
         self.assertEqual(compare_words("testy","test"), True)
-        self.assertRaises(ValueError, word_sorter, 2.13)
+        self.assertRaises(ValueError, compare_words, 2.13 , 321)
