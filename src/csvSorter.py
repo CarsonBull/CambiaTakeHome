@@ -1,8 +1,21 @@
-import os.path
+import sys
 
 
-def main():
-    print("This is a test")
+def order_CSV(inputFileName, outputFileName):
+    '''This function reads a comme delinated file of words with a newline at the end of the first line. It takes all of the words up to the first line and orders them before outputting them to the outputFileself.
+    If the output file already exists it will exit after printing to standard error. Any words that contain nonaplhanumeric characters or spaces will be dropped for the output file. If there are any errors they will be raised as IOErrors or ValueErrors.'''
+
+
+    line = get_line(inputFileName)
+    if line == None:
+        return 1
+
+    words = get_words(line)
+
+    sortedWords = sort_words(words)
+
+    output_CSV(outputFileName, sortedWords)
+
 
 
 
@@ -17,6 +30,7 @@ def get_line(fileName):
 
     if line[-1] == '\n':
         return line
+    print("No carriage return", file=sys.stderr)
     return none
 
 
@@ -54,6 +68,7 @@ def get_words(line):
 
 
 def sort_words(wordList):
+    '''sort_words takes a list of words that have been taken from a file and does a simple decending alphabetic merge sort on them'''
     if type(wordList) != list:
         raise ValueError("A list is requird for this function to work")
 
@@ -134,4 +149,7 @@ def output_CSV(outputFileName, outputList):
     raise IOError("Output file already exists")
 
 if __name__ == "__main__":
-  main("input.csv")
+    try:
+        order_CSV("input.csv","output.csv")
+    except Error as e:
+        print(e)
