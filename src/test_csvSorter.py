@@ -27,3 +27,12 @@ class TestCSVSorter(unittest.TestCase):
         self.assertEqual(word_sorter(["the","cat","ca t","z"]), ["z","the","cat","ca t"])
         self.assertEqual(word_sorter(["c1","a","1d","c","2","1","z"]), ["z","c1","c","a","2","1d","1"])
         self.assertRaises(ValueError, word_sorter, 2.13)
+
+    def test_compare_word(self):
+        '''Tests that the compare_words function returns true when word1 should be placed before word2 and false otherwise'''
+        self.assertEqual(compare_words("b","a"), True)
+        self.assertEqual(compare_words("a","b"), False)
+        self.assertEqual(compare_words("1","1a"), False)
+        self.assertEqual(compare_words("cat","ca t"), False)
+        self.assertEqual(compare_words("testy","test"), True)
+        self.assertRaises(ValueError, word_sorter, 2.13)
