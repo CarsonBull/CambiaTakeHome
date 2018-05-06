@@ -1,3 +1,5 @@
+import os.path
+
 
 def main():
     print("This is a test")
@@ -103,6 +105,33 @@ def compare_words(leftWord, rightWord):
         return False
     else:
         return True
+
+def output_CSV(outputFileName, outputList):
+    '''The output_CSV function takes a list of words and outputs them to a file with commas seperating each word. The end of the line will be signified by a newline character. No other content should exist beyond this. If the file already exists an IOError will be raised and nothing will be writte to the outout file. If a list contains something other than strign the behavior is undefined.'''
+
+    if type(outputFileName) != str:
+        raise ValueError("File name is not of type str")
+
+    if type(outputList) != list:
+        raise ValueError("outputList should be of type list")
+
+    # Tries to open the file for reading. If it exists then we escape the try except and raise an IOException.
+    # If the file does not exist we have an IOError runs the exception block. In the exception block we write
+    # the contents to the file and return before the IOError is raised from the prior read.
+    try:
+        readFile = open(outputFileName, 'r')
+        readFile.close()
+    except:
+        with open(outputFileName, 'w') as outputFile:
+            for i in range(len(outputList)):
+                outputFile.write(outputList[i])
+                if i < len(outputList)-1:
+                    outputFile.write(',')
+
+            outputFile.write('\n')
+        return
+
+    raise IOError("Output file already exists")
 
 if __name__ == "__main__":
   main("input.csv")
