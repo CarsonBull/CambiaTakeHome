@@ -74,3 +74,10 @@ Feature: Normal Sorting (No file issues. Might have issues, or edge cases in the
     Given the csv contains "z,a,.,a.,A!\n"
     When the user runs csvSorter.py
     Then all words containing punctuation will be dropped
+
+
+  Scenario: Run on a csv with mulitple lines
+    Given the csv contains "z,a,.,a.,A!\n test,stuff\n"
+    When the user runs csvSorter.py
+    Then the file will not be processed
+    But an error will be printed to stderr
