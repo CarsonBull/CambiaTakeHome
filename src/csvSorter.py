@@ -157,4 +157,4 @@ if __name__ == "__main__":
         # with open("output.csv") as out:
         #     print(out.readline())
     except Exception as e:
-        print(e, file=sys.strerr)
+        print(e, file=sys.stderr)
