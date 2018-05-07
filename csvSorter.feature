@@ -1,5 +1,5 @@
 # Gherkins file to define the behavior of the csvSorter.py program
-# Cases that shoudl be tested:
+# Cases that should be tested:
 # Normal(input.csv is there and seemingly random), perfect order, backwards, duplicate words,
 # Capitalization, weird chars, blank spots(ie ,,), no file, nothing in file, command line arguments
 # are present, No line ending, output.csv is already present, spaces, failure while sorting
