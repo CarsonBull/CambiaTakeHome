@@ -4,7 +4,7 @@
 # Capitalization, weird chars, blank spots(ie ,,), no file, nothing in file, command line arguments
 # are present, No line ending, output.csv is already present, spaces, failure while sorting
 
-Feature: Normal Sorting (No file issues. Might have issues, or edge cases in the file)
+Feature: Normal Sorting (No file issues. Might have issues with the words, or edge cases in the file)
 
   Background: The user has built the docker container and is ready to run with an imput.csv
 
