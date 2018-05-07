@@ -1,5 +1,5 @@
 import unittest
-from csvSorter import get_line, get_words, sort_words, compare_words, output_CSV, order_CSV
+from csvSorter import get_line, get_words, sort_words, compare_words, output_CSV
 
 
 class TestCSVSorter(unittest.TestCase):
@@ -42,23 +42,14 @@ class TestCSVSorter(unittest.TestCase):
 
     def test_output_csv(self):
         '''Tests that the output_CSV function puts the output in the correct file'''
-        outputName = "output1.csv"
+        outputName = "output.csv"
         output_CSV(outputName, ["z","a"])
         with open(outputName) as outputFile:
             self.assertEqual(outputFile.readline(), "z,a\n")
 
-        outputName = "output2.csv"
+        outputName = "output1.csv"
         output_CSV(outputName, [])
         with open(outputName) as outputFile:
             self.assertEqual(outputFile.readline(), "\n")
 
         self.assertRaises(IOError, output_CSV, "testFile.csv", [])
-
-    def test_order_csv(self):
-        inputFileName = "testinput.csv"
-        outputFileName = "testoutput.csv"
-        order_CSV(inputFileName,outputFileName)
-        outputFile = open(outputFileName, 'r')
-        outputLine = outputFile.readline()
-        outputFile.close()
-        self.assertEqual(outputLine, "z,c,b,a\n")

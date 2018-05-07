@@ -5,10 +5,9 @@ def order_CSV(inputFileName, outputFileName):
     '''This function reads a comme delinated file of words with a newline at the end of the first line. It takes all of the words up to the first line and orders them before outputting them to the outputFileself.
     If the output file already exists it will exit after printing to standard error. Any words that contain nonaplhanumeric characters or spaces will be dropped for the output file. If there are any errors they will be raised as IOErrors or ValueErrors.'''
 
-
     line = get_line(inputFileName)
     if line == None:
-        return 1
+        exit()
 
     words = get_words(line)
 
@@ -27,11 +26,15 @@ def get_line(fileName):
 
     with open(fileName) as csvFile:
         line = csvFile.readline()
+        if csvFile.readline() != '':
+            print("Multiline file. Please Try again with a single line file.", file=sys.stderr)
+            return None
+
 
     if line[-1] == '\n':
         return line
     print("No carriage return", file=sys.stderr)
-    return none
+    return None
 
 
 def get_words(line):
@@ -151,5 +154,7 @@ def output_CSV(outputFileName, outputList):
 if __name__ == "__main__":
     try:
         order_CSV("input.csv","output.csv")
-    except Error as e:
-        print(e)
+        # with open("output.csv") as out:
+        #     print(out.readline())
+    except Exception as e:
+        print(e, file=sys.strerr)
