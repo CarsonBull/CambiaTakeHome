@@ -64,6 +64,8 @@ def get_words(line):
             wordStart = i + 1
         elif badWord:
             continue
+        elif currentChar.isspace() and wordStart == i:
+            wordStart += 1
         elif not (currentChar.isalpha() or currentChar.isdigit() or currentChar.isspace()):
             badWord = True
 
