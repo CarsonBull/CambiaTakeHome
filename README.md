@@ -39,7 +39,7 @@ makes sure that they will run according to the spec provided and
 handles all of the scenarios in the Gherkins feature file.
 
 ##### Running Tests:
-To run the unit test, change the docker CMD to be  
+To run the unit test change the docker CMD to be:  
 'CMD ["python3" , "-m", "unittest", "test_csvSorter.py"]  
 
 
