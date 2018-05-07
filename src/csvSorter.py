@@ -75,6 +75,7 @@ def sort_words(wordList):
     if type(wordList) != list:
         raise ValueError("A list is requird for this function to work")
 
+    # the first two if and elif statements are base cases and stop the recursive program eventually
     if len(wordList) < 2:
         return wordList
     elif len(wordList) == 2:
@@ -84,6 +85,7 @@ def sort_words(wordList):
             return [wordList[1],wordList[0]]
 
     else:
+        # This section takes a list and divides it in half then passes it down to be sorted
         middlePos = len(wordList)//2
         leftHalf = sort_words(wordList[:middlePos])
         rightHalf = sort_words(wordList[middlePos:])
@@ -94,6 +96,11 @@ def sort_words(wordList):
         rightPos = 0
         rightLen = len(rightHalf)
 
+
+        # once both sides of the sorted list come back it goes through and figures 
+        # out which word at the front of the list should go in which position and adds it to sortedWords
+        # If one list has been emptied then if automatically takes the word 
+        # from the other list.
         for i in range(len(wordList)):
             if leftPos >= leftLen:
                 sortedWords.append(rightHalf[rightPos])
@@ -154,6 +161,7 @@ def output_CSV(outputFileName, outputList):
 if __name__ == "__main__":
     try:
         order_CSV("input.csv","output.csv")
+        # Uncomment the lower two lines if you would like the output to be printed to the screen
         # with open("output.csv") as out:
         #     print(out.readline())
     except Exception as e:
