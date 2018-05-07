@@ -39,14 +39,10 @@ Feature: Normal Sorting (No file issues. Might have issues, or edge cases in the
     Then all words with nonalphabetic characters will be dropped
     And the output.csv contains "z,d,a\n"
 
-    Examples:
-    TODO: decide whether to remove anything that has a non alpha numeric char or just if its sorted based on it
-
   Scenario: Run on a csv with no characters
     Given the csv contains "\n"
     When the user runs csvSorter.py
     Then output.csv contains "\n"
-
 
   Scenario: Run on a csv with no line ending
     Given the csv contains "z,d,f,a,q"
@@ -74,7 +70,6 @@ Feature: Normal Sorting (No file issues. Might have issues, or edge cases in the
     Given the csv contains "z,a,.,a.,A!\n"
     When the user runs csvSorter.py
     Then all words containing punctuation will be dropped
-
 
   Scenario: Run on a csv with mulitple lines
     Given the csv contains "z,a,.,a.,A!\n test,stuff\n"
